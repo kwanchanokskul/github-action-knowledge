@@ -32,6 +32,7 @@ jobs:
       - name: deploy-app
         env:
           app_name: ${{ matrix.app_list }}
-        run: echo "Application Name: $app_name"
+        run: |
+          echo "Application Name: $app_name"
   
   
