@@ -19,3 +19,19 @@ jobs:
             echo "$file_name not have, please check"
             exit 1
           fi
+          echo "matrix=$(cat $file_name)" >> $GITHUB_OUTPUT
+  deploy-app:
+    name: deploy-app
+    runs-on: ubuntu-latest
+    needs:
+      - setmatrix
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setmatrix.outputs.matrix) }}
+    steps:
+      - name: deploy-app
+        env:
+          app_name: ${{ matrix.app_list }}
+        run: echo "Application Name: $app_name"
+  
+  
