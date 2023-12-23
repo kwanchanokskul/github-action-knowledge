@@ -19,7 +19,7 @@ jobs:
             echo "$file_name not have, please check"
             exit 1
           fi
-          echo "matrix=$(cat $file_name)" >> $GITHUB_OUTPUT
+          echo "matrix=$(cat $file_name |jq -c)" >> $GITHUB_OUTPUT
   deploy-app:
     name: deploy-app
     runs-on: ubuntu-latest
