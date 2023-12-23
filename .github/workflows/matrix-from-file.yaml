@@ -1,0 +1,21 @@
+name: "Matrix From File"
+on:
+  workflow_dispatch:
+jobs:
+  setmatrix:
+    name: setmatrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v3
+      - id: setmatrix
+        name: setmatrix
+        env:
+          file_name: variables/matrix-from-file.json
+        run: |
+          if [ ! -f $file_name ]; then
+            echo "$file_name not have, please check"
+            exit 1
+          fi
